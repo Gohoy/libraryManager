@@ -173,7 +173,8 @@
         <template slot-scope="scope">
           <el-button v-permission="['admin']" @click="handleUpdate(scope.row)" type="primary" size="small">编辑</el-button>
           <el-button v-permission="['admin']" @click="handleDelete(scope.row,scope.$index)" type="danger" size="small">删除</el-button>
-          <el-button @click="handleBorrow(scope.row)" type="success" size="small">借阅图书</el-button>
+          <!-- <el-button @click="handleBorrow(scope.row)" type="success" size="small">借阅图书</el-button> -->
+          <el-button @click="" type="success" size="small">借阅图书</el-button>
         </template>
       </el-table-column>
     </el-table>

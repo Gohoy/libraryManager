@@ -66,7 +66,7 @@
           <span> password: admin</span>
         </div>
         <div class="tips">
-          <span style="margin-right:20px;">读者 username: wangpeng</span>
+          <span style="margin-right:20px;">读者 username: user</span>
           <span> password: 123456</span>
         </div>
       </div>

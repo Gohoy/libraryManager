@@ -8,7 +8,7 @@
       <el-dropdown class="avatar-container" trigger="click">
         
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <img src="https://ae01.alicdn.com/kf/HTB1M1tMbEGF3KVjSZFo762mpFXav.png" class="user-avatar">
           <span class="user-name"> {{name}} </span>
           <i class="el-icon-caret-bottom" />
         </div>
@@ -18,9 +18,6 @@
               首页
             </el-dropdown-item>
           </router-link>
-          <a target="_blank" href="https://github.com/huanfenz">
-            <el-dropdown-item>作者主页</el-dropdown-item>
-          </a>
           <el-dropdown-item divided @click.native="logout">
             <span style="display:block;">退出登录</span>
           </el-dropdown-item>
