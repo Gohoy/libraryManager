@@ -66,6 +66,8 @@
         <template slot-scope="scope">
           <el-button v-permission="['admin']" @click="handleDelete(scope.row,scope.$index)" type="danger" size="small">delete</el-button>
           <el-button @click="handleReturn(scope.row,scope.$index)" type="success" size="small">return</el-button>
+          <el-button @click="handleKeep(scope.row,scope.$index)" type="success" size="small">keep</el-button>
+
         </template>
       </el-table-column>
     </el-table>
@@ -219,7 +221,7 @@ export default {
     },
 
 	// 续借
-	keepreading(row,index){
+	handleKeep(row,index){
       this.$confirm('继续借阅?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
