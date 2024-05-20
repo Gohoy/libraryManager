@@ -84,3 +84,14 @@ export function returnBook(borrowid, bookid) {
         }
     })
 }
+
+// 续借
+export function keepMoreDays(boorowid) {
+    return request({
+        url: 'borrow/keepMoreDays',
+        method: 'post',
+        params: {
+            borrowid,
+        }
+    })
+}
