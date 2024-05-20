@@ -6,17 +6,17 @@
       <el-input v-model="queryParam.booktypename" placeholder="类型名" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <!-- 一些按钮 -->
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
-        搜索
+        search
       </el-button>
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleShowAll">
-        显示全部
+        listAll
       </el-button>
       <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
-        添加类型
+        addType
       </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="danger" icon="el-icon-delete" @click="handleDeleteSome">
-        批量删除
-      </el-button>
+      <!-- <el-button class="filter-item" style="margin-left: 10px;" type="danger" icon="el-icon-delete" @click="handleDeleteSome">
+        batchDelete
+      </el-button> -->
     </div>
 
     <!--弹出框-->
@@ -24,18 +24,18 @@
       <!--普通表单-->
       <el-form :model="form" :rules="rules" ref="ruleForm" label-width="80px">
 
-        <el-form-item label="类型名称" prop="booktypename">
+        <el-form-item label="name" prop="booktypename">
           <el-input v-model="form.booktypename"></el-input>
         </el-form-item>
 
-        <el-form-item label="类型描述" prop="booktypedesc">
+        <el-form-item label="description" prop="booktypedesc">
           <el-input type="textarea" v-model="form.booktypedesc"></el-input>
         </el-form-item>
       </el-form>
 
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="submitForm">确 定</el-button>
+        <el-button @click="dialogFormVisible = false">cancel</el-button>
+        <el-button type="primary" @click="submitForm">confirm</el-button>
       </div>
     </el-dialog>
 
@@ -53,26 +53,26 @@
       <el-table-column
           fixed
           prop="booktypeid"
-          label="序号"
+          label="id"
           width="100">
       </el-table-column>
       <el-table-column
           prop="booktypename"
-          label="类型名称"
+          label="name"
           show-overflow-tooltip>
       </el-table-column>
       <el-table-column
           prop="booktypedesc"
-          label="类型描述"
+          label="description"
           show-overflow-tooltip>
       </el-table-column>
       <el-table-column
           fixed="right"
-          label="操作"
-          width="150">
+          label="action"
+          width="80">
         <template slot-scope="scope">
-          <el-button @click="handleUpdate(scope.row)" type="primary" size="small">编辑</el-button>
-          <el-button @click="handleDelete(scope.row,scope.$index)" type="danger" size="small">删除</el-button>
+          <!-- <el-button @click="handleUpdate(scope.row)" type="primary" size="small">edit</el-button> -->
+          <el-button @click="handleDelete(scope.row,scope.$index)" type="danger" size="small">delete</el-button>
         </template>
       </el-table-column>
     </el-table>

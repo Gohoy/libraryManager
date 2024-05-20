@@ -10,7 +10,7 @@
     >
       <!-- 标题 -->
       <div class="title-container">
-        <h3 class="title">图书管理系统-注册界面</h3>
+        <h3 class="title">BookManage-Register</h3>
       </div>
       <!-- 用户名 -->
       <el-form-item prop="username">
@@ -20,7 +20,7 @@
         <el-input
           ref="username"
           v-model="loginForm.username"
-          placeholder="请输入用户名"
+          placeholder="please input username"
           name="username"
           type="text"
           tabindex="1"
@@ -36,7 +36,7 @@
           ref="password"
           v-model="loginForm.password"
           type="password"
-          placeholder="请输入密码"
+          placeholder="please input password"
           name="password"
           tabindex="2"
           auto-complete="on"
@@ -51,7 +51,7 @@
           ref="repeat"
           v-model="loginForm.repeat"
           type="password"
-          placeholder="请确认密码"
+          placeholder="please confirm password"
           name="repeat"
           tabindex="3"
           auto-complete="on"
@@ -61,8 +61,8 @@
 
       <!-- 登录按钮 -->
       <div style="height: 40px; margin-bottom: 30px">
-        <el-button :loading="loading" type="primary" style="width: 48%; float: left" @click.native.prevent="handleRight">确认</el-button>
-        <el-button :loading="loading" type="success" style="width: 48%; float: right" @click.native.prevent="handleBack">返回登录</el-button>
+        <el-button :loading="loading" type="primary" style="width: 48%; float: left" @click.native.prevent="handleRight">confirm</el-button>
+        <el-button :loading="loading" type="success" style="width: 48%; float: right" @click.native.prevent="handleBack">login</el-button>
       </div>
     </el-form>
   </div>
@@ -76,7 +76,7 @@ export default {
   data() {
     const validateRepeat = (rule, value, callback) => {
       if (value !== this.loginForm.password) {
-        callback(new Error('两次输入的密码不一致!'))
+        callback(new Error('confirm password is not same as the password!'))
       } else {
         callback()
       }
@@ -89,11 +89,11 @@ export default {
       },
       loginRules: {
         username: [
-          { required: true, message: '请输入用户名', trigger: 'blur' }
+          { required: true, message: 'please input username', trigger: 'blur' }
         ],
-        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+        password: [{ required: true, message: 'please input password', trigger: 'blur' }],
         repeat: [
-          { required: true, message: '请再次输入密码', trigger: 'blur' },
+          { required: true, message: 'please input password again', trigger: 'blur' },
           { trigger: 'blur', validator: validateRepeat }
         ]
       },
@@ -106,13 +106,13 @@ export default {
         if (valid) {
           register({ username: this.loginForm.username, password: this.loginForm.password}).then((res) => {
             if (res === 0) {
-              this.$message.error('注册失败，可能账号重复了')
+              this.$message.error('failed:username duplicate!')
             } else {
-              this.$message.success('注册成功')
+              this.$message.success('register success')
             }
           })
         } else {
-          console.log('不允许提交!')
+          console.log('submit not allowed!')
           return false
         }
       })

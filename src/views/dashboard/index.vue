@@ -1,14 +1,14 @@
 <template>
   <div class="dashboard-container">
-    <div title="欢迎页面" style="padding: 50px; overflow: hidden; color: #409eff;font: lighter 16px 'Lucida Sans Unicode';"
+    <div title="Welcome" style="padding: 50px; overflow: hidden; color: #409eff;font: lighter 16px 'Lucida Sans Unicode';"
          data-options="iconCls:'icon-heart',plain:true">
-        <b style="font-size: 36px; line-height: 30px; height: 30px;">欢迎使用图书管理系统</b>
+        <b style="font-size: 36px; line-height: 30px; height: 30px;">Welcome to BookManager</b>
         <hr/>
-        <b>项目开发环境介绍</b>
-        <p>Java版本: 1.8.0</p>
-        <p>数据库: MySQL 8.0</p>
-        <p>前端技术: HTML+CSS+JavaScript+Vue+Axios+ElementUI</p>
-        <p>后端技术: Java+SpringBoot+MyBatis+MySQL</p>
+        <b>develop environment</b>
+        <p>JavaVersion: 1.8.0</p>
+        <p>dataBase: MySQL 8.0</p>
+        <p>forward: HTML+CSS+JavaScript+Vue+Axios+ElementUI</p>
+        <p>backend: Java+SpringBoot+MyBatis+MySQL</p>
     </div>
   </div>
 </template>

@@ -57,7 +57,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '首页', icon: 'dashboard' }
+      meta: { title: 'Home', icon: 'dashboard' }
     }]
   }
 ]
@@ -75,7 +75,7 @@ export const asyncRoutes = [
     redirect: '/bookmanage/bookinfo',
     alwaysShow: true,
     meta: {
-      title: '图书管理',
+      title: 'BookManage',
       icon: 'book'
     },
     children: [
@@ -84,7 +84,7 @@ export const asyncRoutes = [
         name: 'Bookinfo',
         component: () => import('@/views/bookinfo/index'),
         meta: {
-          title: '图书信息管理',
+          title: 'BookInfoManage',
           icon: 'form',
           roles: ['admin', 'reader'],
           noCache: true 
@@ -95,7 +95,7 @@ export const asyncRoutes = [
         name: 'Booktype',
         component: () => import('@/views/booktype/index'),
         meta: {
-          title: '图书类型管理',
+          title: 'BookTypeManage',
           icon: 'example',
           roles: ['admin'],
           noCache: true 
@@ -106,7 +106,7 @@ export const asyncRoutes = [
         name: 'Borrow',
         component: () => import('@/views/borrow/index'),
         meta: {
-          title: '借阅信息管理',
+          title: 'BorrowInfoManage',
           icon: 'borrow',
           roles: ['admin', 'reader'],
           noCache: true 
@@ -122,7 +122,7 @@ export const asyncRoutes = [
     redirect: '/other/user',
     alwaysShow: true,
     meta: {
-      title: '其他管理',
+      title: 'other',
       icon: 'other' 
     },
     children: [
@@ -131,23 +131,24 @@ export const asyncRoutes = [
         name: 'User',
         component: () => import('@/views/user/index'),
         meta: {
-          title: '用户管理',
+          title: 'UserManage',
           icon: 'user',
           roles: ['admin'],
           noCache: true 
         }
-      },
-      {
-        path: 'password',
-        name: 'Password',
-        component: () => import('@/views/password/index'),
-        meta: {
-          title: '修改密码',
-          icon: 'password',
-          roles: ['admin', 'reader'],
-          noCache: true 
-        }
       }
+      // ,
+      // {
+      //   path: 'password',
+      //   name: 'Password',
+      //   component: () => import('@/views/password/index'),
+      //   meta: {
+      //     title: 'EditPassword',
+      //     icon: 'password',
+      //     roles: ['admin', 'reader'],
+      //     noCache: true 
+      //   }
+      // }
     ]
   },
 

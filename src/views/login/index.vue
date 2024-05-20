@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
       <!-- 标题 -->
       <div class="title-container">
-        <h3 class="title">图书管理系统-登录界面</h3>
+        <h3 class="title">LibraryManager-Login</h3>
       </div>
       <!-- 用户名 -->
       <el-form-item prop="username">
@@ -14,7 +14,7 @@
           class="yuan"
           ref="username"
           v-model="loginForm.username"
-          placeholder="请输入用户名"
+          placeholder="please input username"
           name="username"
           type="text"
           tabindex="1"
@@ -32,7 +32,7 @@
           ref="password"
           v-model="loginForm.password"
           :type="passwordType"
-          placeholder="请输入密码"
+          placeholder="please input password"
           name="password"
           tabindex="2"
           auto-complete="on"
@@ -47,26 +47,26 @@
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
-        <el-select v-model="loginForm.isadmin" placeholder="请选择" style="width: 418px">
-          <el-option :key="1" label="管理员" :value="1"></el-option>
-          <el-option :key="0" label="读者" :value="0"></el-option>
+        <el-select v-model="loginForm.isadmin" placeholder="select user role" style="width: 418px">
+          <el-option :key="1" label="admin" :value="1"></el-option>
+          <el-option :key="0" label="user" :value="0"></el-option>
         </el-select>
       </el-form-item>
       
       <!-- 登录按钮 -->
       <div style="height: 40px; margin-bottom: 30px;">
-        <el-button :loading="loading" type="primary" style="width: 48%; float: left;" @click.native.prevent="handleLogin">登录</el-button>
-        <el-button :loading="loading" type="success" style="width: 48%; float: right;" @click.native.prevent="handleRegister">注册</el-button>
+        <el-button :loading="loading" type="primary" style="width: 48%; float: left;" @click.native.prevent="handleLogin">login</el-button>
+        <el-button :loading="loading" type="success" style="width: 48%; float: right;" @click.native.prevent="handleRegister">register</el-button>
       </div>
 
       <!-- 提示 -->
       <div>
         <div class="tips">
-          <span style="margin-right:20px;">管理员 username: admin</span>
+          <span style="margin-right:20px;">[admin] username: admin</span>
           <span> password: admin</span>
         </div>
         <div class="tips">
-          <span style="margin-right:20px;">读者 username: user</span>
+          <span style="margin-right:20px;">[user] username: test</span>
           <span> password: 123456</span>
         </div>
       </div>
@@ -128,7 +128,7 @@ export default {
       })
     },
     handleRegister() {
-      console.log("注册按钮")
+      console.log("register")
       this.$router.push({ path: '/register' })  // 进注册页面
     }
   }

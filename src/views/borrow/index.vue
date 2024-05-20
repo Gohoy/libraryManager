@@ -8,14 +8,14 @@
       <el-input v-model="queryParam.bookname" placeholder="图书名" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <!-- 一些按钮 -->
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
-        搜索
+        search
       </el-button>
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleShowAll">
-        显示全部
+        listAll
       </el-button>
-      <el-button v-permission="['admin']" class="filter-item" style="margin-left: 10px;" type="danger" icon="el-icon-delete" @click="handleDeleteSome">
-        批量删除
-      </el-button>
+      <!-- <el-button v-permission="['admin']" class="filter-item" style="margin-left: 10px;" type="danger" icon="el-icon-delete" @click="handleDeleteSome">
+        batchDelete
+      </el-button> -->
       <!-- <el-button class="filter-item" style="margin-left: 10px;" type="success" icon="el-icon-edit" @click="handleReturnSome">
         批量还书
       </el-button> -->
@@ -35,37 +35,37 @@
       <el-table-column
           fixed
           prop="borrowid"
-          label="序号"
+          label="id"
           width="100">
       </el-table-column>
       <el-table-column
           prop="username"
-          label="用户名"
+          label="username"
           show-overflow-tooltip>
       </el-table-column>
       <el-table-column
           prop="bookname"
-          label="图书名"
+          label="bookname"
           show-overflow-tooltip>
       </el-table-column>
       <el-table-column
           prop="borrowtimestr"
-          label="借书时间">
+          label="borrowTime">
       </el-table-column>
       <el-table-column
-          label="还书时间">
+          label="returnTime">
           <template slot-scope="scope">
-            <span v-if="scope.row.returntimestr === null || scope.row.returntimestr === ''" style="color: red">等待还书</span>
+            <span v-if="scope.row.returntimestr === null || scope.row.returntimestr === ''" style="color: red">not return</span>
             <span v-else style="color: #1aac1a">{{scope.row.returntimestr}}</span>
           </template>
       </el-table-column>
       <el-table-column
           fixed="right"
-          label="操作"
+          label="action"
           :width="roleIsAdmin?'180px':'110px'">
         <template slot-scope="scope">
-          <el-button v-permission="['admin']" @click="handleDelete(scope.row,scope.$index)" type="danger" size="small">删除</el-button>
-          <el-button @click="handleReturn(scope.row,scope.$index)" type="success" size="small">归还图书</el-button>
+          <el-button v-permission="['admin']" @click="handleDelete(scope.row,scope.$index)" type="danger" size="small">delete</el-button>
+          <el-button @click="handleReturn(scope.row,scope.$index)" type="success" size="small">return</el-button>
         </template>
       </el-table-column>
     </el-table>

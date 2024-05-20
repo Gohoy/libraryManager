@@ -3,26 +3,26 @@
     <!-- 顶部功能 -->
     <div class="filter-container" style="margin-bottom: 15px">
       <!-- 书名输入 -->
-      <el-input v-model="queryParam.bookname" placeholder="书名" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="queryParam.bookname" placeholder="bookName" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <!-- 作者输入 -->
-      <el-input v-model="queryParam.bookauthor" placeholder="作者" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="queryParam.bookauthor" placeholder="author" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <!-- 类型选择 -->
-      <el-select v-model="queryParam.booktypeid" filterable placeholder="类型" clearable class="filter-item" style="width: 200px">
+      <el-select v-model="queryParam.booktypeid" filterable placeholder="type" clearable class="filter-item" style="width: 200px">
         <el-option v-for="item in typeData" :key="item.booktypeid" :label="item.booktypename" :value="item.booktypeid" />
       </el-select>
       <!-- 一些按钮 -->
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
-        搜索
+        search
       </el-button>
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleShowAll">
-        显示全部
+        listAll
       </el-button>
       <el-button v-permission="['admin']" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
-        添加图书
+        addBook
       </el-button>
-      <el-button v-permission="['admin']" class="filter-item" style="margin-left: 10px;" type="danger" icon="el-icon-delete" @click="handleDeleteSome">
-        批量删除
-      </el-button>
+      <!-- <el-button v-permission="['admin']" class="filter-item" style="margin-left: 10px;" type="danger" icon="el-icon-delete" @click="handleDeleteSome">
+        batchDelete
+      </el-button> -->
     </div>
 
     <!--弹出框-->
@@ -32,19 +32,19 @@
           <!--普通表单-->
           <el-form :model="form" :rules="rules" ref="ruleForm" label-width="80px">
 
-            <el-form-item label="图书名称" prop="bookname">
+            <el-form-item label="name" prop="bookname">
               <el-input v-model="form.bookname"></el-input>
             </el-form-item>
 
-            <el-form-item label="作者" prop="bookauthor">
+            <el-form-item label="author" prop="bookauthor">
               <el-input v-model="form.bookauthor"></el-input>
             </el-form-item>
 
-            <el-form-item label="价格" prop="bookprice">
+            <el-form-item label="price" prop="bookprice">
               <el-input v-model="form.bookprice"></el-input>
             </el-form-item>
 
-            <el-form-item label="图书类型" prop="booktypeid">
+            <el-form-item label="type" prop="booktypeid">
               <el-select v-model="form.booktypeid" placeholder="请选择类型">
                 <el-option
                     v-for="item in typeData"
@@ -55,14 +55,14 @@
               </el-select>
             </el-form-item>
 
-            <el-form-item label="书籍描述" prop="bookdesc">
+            <el-form-item label="description" prop="bookdesc">
               <el-input type="textarea" v-model="form.bookdesc"></el-input>
             </el-form-item>
           </el-form>
         </el-col>
         <el-col :span="8">
           <div align="center">
-            <h3>点击下方图片上传封面</h3>
+            <h3>click to upload cover</h3>
             <!--上传图片-->
             <el-upload
                 class="avatar-uploader"
@@ -70,7 +70,7 @@
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload">
-              <img v-if="form.bookimg" :src="form.bookimg" class="avatar" alt="封面无法显示">
+              <img v-if="form.bookimg" :src="form.bookimg" class="avatar" alt="cover can't be loaded">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </div>
@@ -79,16 +79,16 @@
       </el-row>
 
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="submitForm">确 定</el-button>
+        <el-button @click="dialogFormVisible = false">cancel</el-button>
+        <el-button type="primary" @click="submitForm">confirm</el-button>
       </div>
     </el-dialog>
 
     <!--弹出框2-->
-    <el-dialog title="选择用户" :visible.sync="dialogFormVisible2" width="400px">
+    <el-dialog title="select user" :visible.sync="dialogFormVisible2" width="400px">
       <el-form :model="form2">
-        <el-form-item label="用户名" prop="userid" label-width="80px">
-              <el-select v-model="form2.booktypeid" placeholder="请选择用户">
+        <el-form-item label="username" prop="userid" label-width="80px">
+              <el-select v-model="form2.booktypeid" placeholder="please select user">
                 <el-option
                     v-for="item in userData"
                     :key="item.userid"
@@ -99,8 +99,8 @@
             </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible2 = false">取 消</el-button>
-        <el-button type="primary" @click="submitForm2">确 定</el-button>
+        <el-button @click="dialogFormVisible2 = false">cancel</el-button>
+        <el-button type="primary" @click="submitForm2">confirm</el-button>
       </div>
     </el-dialog>
 
@@ -118,12 +118,12 @@
       <el-table-column
           fixed
           prop="bookid"
-          label="序号"
+          label="id"
           width="100">
       </el-table-column>
       <el-table-column
           v-if="roleIsAdmin === false"
-          label="图书封面"
+          label="cover"
           width="155">
           <template slot-scope="scope">
             <el-image :src="scope.row.bookimg" style="width: 130px; height: 180px"></el-image>
@@ -131,50 +131,49 @@
       </el-table-column>
       <el-table-column
           prop="bookname"
-          label="图书名称"
+          label="name"
           width="150"
           show-overflow-tooltip>
       </el-table-column>
       <el-table-column
           prop="bookauthor"
-          label="图书作者"
+          label="author"
           width="100"
           show-overflow-tooltip>
       </el-table-column>
       <el-table-column
           prop="bookprice"
-          label="图书价格"
+          label="price"
           width="100">
       </el-table-column>
       <el-table-column
           prop="booktypename"
-          label="图书类型名"
+          label="type"
           width="100"
           show-overflow-tooltip>
       </el-table-column>
       <el-table-column
           prop="bookdesc"
-          label="图书描述"
+          label="description"
           min-width="300"
           show-overflow-tooltip>
       </el-table-column>
       <el-table-column
-          label="图书状态"
+          label="status"
           width="100">
           <template slot-scope="scope">
-            <span v-if="scope.row.isborrowed === 1" style="color: red">已借出</span>
-            <span v-else style="color: #1aac1a">未借出</span>
+            <span v-if="scope.row.isborrowed === 1" style="color: red">borrowed</span>
+            <span v-else style="color: #1aac1a">ready</span>
           </template>
       </el-table-column>
       <el-table-column
           fixed="right"
-          label="操作"
-          :width="roleIsAdmin?'240px':'110px'">
+          label="action"
+          :width="roleIsAdmin?'80px':'110px'">
         <template slot-scope="scope">
-          <el-button v-permission="['admin']" @click="handleUpdate(scope.row)" type="primary" size="small">编辑</el-button>
-          <el-button v-permission="['admin']" @click="handleDelete(scope.row,scope.$index)" type="danger" size="small">删除</el-button>
-          <!-- <el-button @click="handleBorrow(scope.row)" type="success" size="small">借阅图书</el-button> -->
-          <el-button @click="" type="success" size="small">借阅图书</el-button>
+          <!-- <el-button v-permission="['admin']" @click="handleUpdate(scope.row)" type="primary" size="small">edit</el-button> -->
+          <el-button v-permission="['admin']" @click="handleDelete(scope.row,scope.$index)" type="danger" size="small">delete</el-button>
+          <el-button @click="handleBorrow(scope.row)" type="success" size="small" v-if="!roleIsAdmin" :disabled="scope.row.isborrowed === 1" >borrow</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -368,13 +367,13 @@ export default {
           this.userData = res
         })
       } else {
-        this.$confirm('您确定要借书吗?', '提示').then(() => {
+        this.$confirm('confirm to borrow this book?', 'info').then(() => {
           borrowBook(this.id, row.bookid).then(res => {
             if(res === 1) {
-              this.$message.success('借书成功')
+              this.$message.success('success')
               this.handleCurrentChange(this.queryParam.page)
             } else {
-              this.$message.error('借书失败')
+              this.$message.error('failed')
             }
             this.dialogFormVisible2 = false // 关闭对话框
           })
@@ -387,7 +386,7 @@ export default {
       if (this.formType === 0) {  // 添加记录
         addBookInfo(this.form).then(res => {
           if(res === 1) {
-            this.$message.success('添加记录成功')
+            this.$message.success('add success')
             // 跳转到末尾
             getCount().then(res => {
               this.recordTotal = res
@@ -395,17 +394,17 @@ export default {
               this.handleCurrentChange(this.queryParam.page)
             })
           } else {
-            this.$message.error('添加记录失败')
+            this.$message.error('add failed')
           }
           this.dialogFormVisible = false  // 关闭对话框
         })
       } else if(this.formType === 1) {  //更新记录
         updateBookInfo(this.form).then(res => {
           if(res === 1) {
-            this.$message.success('更新记录成功')
+            this.$message.success('update success')
             this.handleCurrentChange(this.queryParam.page)
           } else {
-            this.$message.error('更新记录失败')
+            this.$message.error('update failed')
           }
           this.dialogFormVisible = false  // 关闭对话框
         })
@@ -416,10 +415,10 @@ export default {
     submitForm2() {
       borrowBook(this.form2.userid, this.form2.bookid).then(res => {
         if(res === 1) {
-          this.$message.success('借书成功')
+          this.$message.success('borrow success')
           this.handleCurrentChange(this.queryParam.page)
         } else {
-          this.$message.error('借书失败')
+          this.$message.error('borrow failed')
         }
         this.dialogFormVisible2 = false // 关闭对话框
       })
@@ -427,14 +426,14 @@ export default {
 
     // 删除记录
     handleDelete(row, index) {
-      this.$confirm('确定要删除该条记录吗?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('confirm to delete this column?', '提示', {
+        confirmButtonText: 'confirm',
+        cancelButtonText: 'cancel',
         type: 'warning'
       }).then(() => {
         deleteBookInfo(row).then(res => {
           if(res === 1) {
-            this.$message.success('删除记录成功')
+            this.$message.success('delete success')
             this.tableData.splice(index, 1)
             // 如果删完了，获取上一页
             if(this.tableData.length === 0) {
@@ -442,7 +441,7 @@ export default {
               this.handleCurrentChange(this.queryParam.page)
             }
           } else {
-            this.$message.error('删除记录失败')
+            this.$message.error('delete failed')
           }
         })
       })
@@ -450,16 +449,16 @@ export default {
 
     // 删除一些
     handleDeleteSome() {
-      this.$confirm('确定要删除这些记录吗?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('confirm to delete this column?', 'warning', {
+        confirmButtonText: 'confirm',
+        cancelButtonText: 'cancel',
         type: 'warning'
       }).then(() => {
         // 获取选中的对象数组
         const items = this.$refs.multipleTable.selection
         deleteBookInfos(items).then(res => {
           if(res > 0) {
-            this.$message.success('删除' + res + '条记录成功')
+            this.$message.success('delete' + res + 'columns success')
             if(this.tableData.length === res) {  //如果本页内容全部删光了
               //当前页为上一页
               if(this.queryParam.page !== 0) {
@@ -469,7 +468,7 @@ export default {
             // 重载当前页
             this.handleCurrentChange(this.queryParam.page)
           } else {
-            this.$message.error('删除记录失败')
+            this.$message.error('delete failed')
           }
         })
       })
@@ -516,22 +515,22 @@ export default {
       },
       rules: {
         bookname: [
-          { required: true, message: '请输入图书名称', trigger: 'blur' }
+          { required: true, message: 'please input book name', trigger: 'blur' }
         ],
         bookauthor: [
-          { required: true, message: '请输入作者', trigger: 'blur' }
+          { required: true, message: 'please input author', trigger: 'blur' }
         ],
         bookprice: [
-          { required: true, message: '请输入价格', trigger: 'blur' }
+          { required: true, message: 'please input price', trigger: 'blur' }
         ],
         booktypeid: [
-          { required: true, message: '请选择类型', trigger: 'blur' }
+          { required: true, message: 'please input type', trigger: 'blur' }
         ],
         bookdesc: [
-          { required: true, message: '请输入描述', trigger: 'blur' }
+          { required: true, message: 'please input description', trigger: 'blur' }
         ],
         isborrowed: [
-          { required: true, message: '请选择状态', trigger: 'blur' }
+          { required: true, message: 'please input status', trigger: 'blur' }
         ]
       },
     }

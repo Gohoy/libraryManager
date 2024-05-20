@@ -3,20 +3,20 @@
     <!-- 顶部功能 -->
     <div class="filter-container" style="margin-bottom: 15px">
       <!-- 用户名输入 -->
-      <el-input v-model="queryParam.username" placeholder="用户名" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="queryParam.username" placeholder="username" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <!-- 一些按钮 -->
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
-        搜索
+        search
       </el-button>
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleShowAll">
-        显示全部
+        listAll
       </el-button>
       <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
-        添加用户
+        addUser
       </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="danger" icon="el-icon-delete" @click="handleDeleteSome">
-        批量删除
-      </el-button>
+      <!-- <el-button class="filter-item" style="margin-left: 10px;" type="danger" icon="el-icon-delete" @click="handleDeleteSome">
+        batchDelete
+      </el-button> -->
     </div>
 
     <!--弹出框-->
@@ -24,23 +24,23 @@
       <!--普通表单-->
       <el-form :model="form" :rules="rules" ref="ruleForm" label-width="80px">
 
-        <el-form-item label="用户名称" prop="username">
+        <el-form-item label="username" prop="username">
           <el-input v-model="form.username"></el-input>
         </el-form-item>
 
-        <el-form-item label="用户密码" prop="userpassword">
+        <el-form-item label="password" prop="userpassword">
           <el-input v-model="form.userpassword"></el-input>
         </el-form-item>
 
-        <el-form-item label="身份" prop="isadmin">
-          <el-radio v-model="form.isadmin" :label="1">管理员</el-radio>
-          <el-radio v-model="form.isadmin" :label="0">读者</el-radio>
+        <el-form-item label="role" prop="isadmin">
+          <el-radio v-model="form.isadmin" :label="1">admin</el-radio>
+          <el-radio v-model="form.isadmin" :label="0">user</el-radio>
         </el-form-item>
       </el-form>
 
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="submitForm">确 定</el-button>
+        <el-button @click="dialogFormVisible = false">cancel</el-button>
+        <el-button type="primary" @click="submitForm">confirm</el-button>
       </div>
     </el-dialog>
 
@@ -58,34 +58,34 @@
       <el-table-column
           fixed
           prop="userid"
-          label="序号"
+          label="id"
           width="100">
       </el-table-column>
       <el-table-column
           prop="username"
-          label="用户名称"
+          label="username"
           show-overflow-tooltip>
       </el-table-column>
       <el-table-column
           prop="userpassword"
-          label="用户密码"
+          label="password"
           show-overflow-tooltip>
       </el-table-column>
       <el-table-column
-          label="用户身份"
+          label="role"
           show-overflow-tooltip>
           <template slot-scope="scope">
-            <el-tag v-if="scope.row.isadmin === 1" type="warning">管理员</el-tag>
-            <el-tag v-else type="success">读者</el-tag>
+            <el-tag v-if="scope.row.isadmin === 1" type="warning">admin</el-tag>
+            <el-tag v-else type="success">user</el-tag>
           </template>
       </el-table-column>
       <el-table-column
           fixed="right"
-          label="操作"
-          width="150">
+          label="action"
+          width="80">
         <template slot-scope="scope">
-          <el-button @click="handleUpdate(scope.row)" type="primary" size="small">编辑</el-button>
-          <el-button @click="handleDelete(scope.row,scope.$index)" type="danger" size="small">删除</el-button>
+          <!-- <el-button @click="handleUpdate(scope.row)" type="primary" size="small">edit</el-button> -->
+          <el-button @click="handleDelete(scope.row,scope.$index)" type="danger" size="small">delete</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -305,10 +305,10 @@ export default {
       },
       rules: {
         username: [
-          { required: true, message: '请输入用户名', trigger: 'blur' }
+          { required: true, message: 'please input username', trigger: 'blur' }
         ],
         userpassword: [
-          { required: true, message: '请输入用户密码', trigger: 'blur' }
+          { required: true, message: 'please input password', trigger: 'blur' }
         ]
       },
     }
