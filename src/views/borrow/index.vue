@@ -218,6 +218,24 @@ export default {
       })
     },
 
+	// 续借
+	keepreading(row,index){
+      this.$confirm('继续借阅?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        keepMoreDays(row.borrowid).then(res => {
+          if(res === 1) {
+            this.$message.success('续借成功')
+            this.handleCurrentChange(this.queryParam.page)
+          } else {
+            this.$message.error('续借失败')
+          }
+        })
+      })
+    },
+    
     // 批量还书
     // handleReturn(row, index) {
     //   this.$confirm('确定要还书吗?', '提示', {
