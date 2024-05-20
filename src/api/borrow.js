@@ -91,7 +91,7 @@ export function keepMoreDays(boorowid) {
         url: 'borrow/keepMoreDays',
         method: 'post',
         params: {
-            borrowid,
+            borrowid
         }
     })
 }
